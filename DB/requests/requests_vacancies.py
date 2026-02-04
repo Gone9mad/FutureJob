@@ -6,7 +6,6 @@ from DB.models.models_user import Profile
 from DB.models.models_vacancies import Vacancy, Favorite
 from DB.settings_db import async_sessions
 
-from parsing_data.settings_playwright import async_settings_pw
 
 
 
@@ -15,22 +14,22 @@ from parsing_data.settings_playwright import async_settings_pw
 #####################################################
 
 # add data vacancies to DB
-async def add_vacancy() -> None:
-    try:
-        data = await async_settings_pw()
-        async with async_sessions() as sess:
-            vacancy = Vacancy(
-                                name_vacancy=data[0],
-                                name_company=data[1],
-                                salary=data[2],
-                                geolocation=data[3],
-                                description=data[4],
-                                requirement=data[5]
-                              )
-            sess.add(vacancy)
-            await sess.commit()
-    except Exception as ex:
-        logger.exception(f'Error: {ex}')
+# async def add_vacancy() -> None:
+#     try:
+#         data = await async_settings_pw()
+#         async with async_sessions() as sess:
+#             vacancy = Vacancy(
+#                                 name_vacancy=data[0],
+#                                 name_company=data[1],
+#                                 salary=data[2],
+#                                 geolocation=data[3],
+#                                 description=data[4],
+#                                 requirement=data[5]
+#                               )
+#             sess.add(vacancy)
+#             await sess.commit()
+#     except Exception as ex:
+#         logger.exception(f'Error: {ex}')
 
 # add vacancy to favorites
 async def add_to_favorites(user_id: int, vacancy_id: int):
