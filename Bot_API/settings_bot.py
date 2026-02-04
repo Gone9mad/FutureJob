@@ -8,7 +8,7 @@ from Bot_API.handlers.cmd_handlers import router_commands
 from Bot_API.handlers.filters_handlers import router_filters
 from Bot_API.handlers.callback_handlers import router_callback
 from admin.handlers_admin import admin_router
-from DB.requests.requests_vacancies import add_vacancy
+
 
 from loguru import logger
 
@@ -26,7 +26,6 @@ dp = Dispatcher(storage=MemoryStorage()) # заменить на Redis для п
 async def start_bot() -> None:
     try:
         await init_db()
-        # await add_vacancy()
         dp.include_routers(router_commands, router_filters, router_callback, admin_router)
         await dp.start_polling(bot)
     except Exception as ex:
